@@ -53,6 +53,7 @@
     flex-wrap:wrap;
     gap:16px;
     margin-bottom:18px;
+    position:relative; z-index:500; /* tem que ficar acima de qualquer .grid-kpi/.card */
   }
   .topbar h1{
     font-family:'Bebas Neue', sans-serif;
@@ -398,7 +399,10 @@
     .cal-day{ padding:6px 0; font-size:11px; }
   }
 
-  .card, .topbar{ opacity:0; transform:translateY(10px); animation:fadeIn .5s ease forwards; }
+  /* IMPORTANTE: .topbar NÃO entra nessa animação — um elemento com transform vira
+     um novo contexto de empilhamento e "prende" o z-index do filtro de data lá dentro,
+     fazendo os cards por baixo aparecerem na frente do painel do calendário. */
+  .card{ opacity:0; transform:translateY(10px); animation:fadeIn .5s ease forwards; }
   @keyframes fadeIn{ to{ opacity:1; transform:translateY(0); } }
 </style>
 </head>
@@ -465,19 +469,19 @@
       <div class="card-head">
         <div>
           <div class="card-title">Faturamento Líquido x Investimento x Mensagens</div>
-          <div class="card-sub">Comissão Tutory (Pago) · Investimento Meta · Conversas iniciadas no WhatsApp — por mês</div>
+          <div class="card-sub" id="mainChartSub">Comissão Tutory (Pago) · Investimento Meta · Conversas iniciadas no WhatsApp</div>
         </div>
         <div class="legend">
           <span><i style="background:var(--purple-light)"></i>Faturamento</span>
           <span><i style="background:#FFFFFF"></i>Investimento</span>
           <span><i style="background:var(--green)"></i>Mensagens</span>
+          <div class="view-toggle" id="chartViewToggle">
+            <button data-granularity="weekly">Semanal</button>
+            <button data-granularity="monthly" class="active">Mensal</button>
+          </div>
         </div>
       </div>
       <div class="chart-wrap"><canvas id="mainChart"></canvas></div>
-      <div class="chart-note" id="chartNote" style="display:none;">
-        <span class="dash-swatch"></span>
-        <span>Barras/pontos hachurados = a Meta só reportou o total agregado do período (sem quebra diária/mensal exata) — valor dividido proporcionalmente só para desenho do gráfico. Mensagens (WhatsApp) só são reportadas pela Meta a partir de 01/07/26.</span>
-      </div>
     </div>
   </div>
 
@@ -519,15 +523,6 @@
 
   </div>
 
-  <div class="data-footer">
-    <b>Sobre os dados desta visão:</b>
-    <ul>
-      <li>Faturamento sempre vem da Tutory (comissão, status Pago) — nunca do gerenciador de anúncios.</li>
-      <li>21/08 a 27/08: sem captura própria em nenhuma fonte — valores mantidos do último dado disponível, sem interpolação.</li>
-      <li>29/08 a 07/09: Meta entregou só o total agregado do período (sem quebra diária) para investimento — dividido igualmente entre os dias apenas para desenho do gráfico; os totais do período estão corretos.</li>
-      <li>Conversas iniciadas (WhatsApp) e Custo por mensagem só existem a partir de 01/07/26 — não há esse dado para junho.</li>
-    </ul>
-  </div>
 
 </div>
 
@@ -569,15 +564,6 @@
     </div>
   </div>
 
-  <div class="data-footer">
-    <b>Sobre os números do Lançamento:</b>
-    <ul>
-      <li>Leads totais = 459 pessoas únicas (por e-mail) na lista de formulário que você enviou — o arquivo bruto tem 503 envios, mas 44 são reenvios da mesma pessoa (mesmo e-mail em datas diferentes), então deduplicamos.</li>
-      <li>Leads pagos = 246, vindos do indicador fb_pixel_lead da Meta (confirmado — bate com a campanha de captação).</li>
-      <li>Leads orgânicos = 459 − 246 = 213 (leads totais menos os pagos).</li>
-      <li>Investimento do lançamento = gasto real da campanha "[L01] [O DECRETO PMDF/PMG] [CAPTAÇÃO]" só nos dias de julho (24/07 a 31/07) + gasto de TODAS as campanhas em agosto inteiro (Perpétuo, WhatsApp direto e L01 juntos) — sem contar a parte de agosto do L01 duas vezes.</li>
-    </ul>
-  </div>
 
 </div>
 
@@ -613,6 +599,16 @@ function monthLabel(key){
   const names = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
   return names[parseInt(m,10)-1] + '/' + y.slice(2);
 }
+function isoWeekStartKey(dateStr){
+  const d = toDate(dateStr);
+  const day = (d.getDay() + 6) % 7; // segunda=0
+  d.setDate(d.getDate() - day);
+  return d.toISOString().slice(0,10);
+}
+function weekLabel(key){
+  return toDate(key).toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'});
+}
+let chartGranularity = 'monthly';
 
 function filterDaily(start, end){
   return RAW.daily.filter(d => d.date >= start && d.date <= end);
@@ -689,8 +685,6 @@ function render(start, end){
   document.getElementById('rangeLabel').textContent =
     `${toDate(start).toLocaleDateString('pt-BR',{day:'2-digit',month:'short'})} – ${toDate(end).toLocaleDateString('pt-BR',{day:'2-digit',month:'short'})}`;
 
-  const hasEstimated = daily.some(d => d.estimado);
-  document.getElementById('chartNote').style.display = hasEstimated ? 'flex' : 'none';
 }
 
 function renderKPIs({totalGasto, totalFaturamento, roas, totalVendas, cpa, ticket, totalMsgs, custoMsg, prevGasto, prevFaturamento}){
@@ -714,26 +708,33 @@ function renderKPIs({totalGasto, totalFaturamento, roas, totalVendas, cpa, ticke
     </div>`).join('');
 }
 
-// ---- Gráfico principal (mensal: Faturamento + Investimento + Mensagens) ----
+// ---- Gráfico principal (Semanal ou Mensal: Faturamento + Investimento + Mensagens) ----
 function renderMainChart(daily){
   if (mainChartInstance) mainChartInstance.destroy();
   const ctx = document.getElementById('mainChart');
 
-  const months = {};
+  const isWeekly = chartGranularity === 'weekly';
+  const keyFn = isWeekly ? isoWeekStartKey : monthKey;
+  const labelFn = isWeekly ? weekLabel : monthLabel;
+
+  const buckets = {};
   daily.forEach(d => {
-    const k = monthKey(d.date);
-    if (!months[k]) months[k] = { faturamento:0, gasto:0, msgs:0, estimado:false };
-    months[k].faturamento += d.faturamento;
-    months[k].gasto += d.gasto;
-    months[k].msgs += (d.msgs||0);
-    if (d.estimado) months[k].estimado = true;
+    const k = keyFn(d.date);
+    if (!buckets[k]) buckets[k] = { faturamento:0, gasto:0, msgs:0, estimado:false };
+    buckets[k].faturamento += d.faturamento;
+    buckets[k].gasto += d.gasto;
+    buckets[k].msgs += (d.msgs||0);
+    if (d.estimado) buckets[k].estimado = true;
   });
-  const keys = Object.keys(months).sort();
-  const labels = keys.map(monthLabel);
-  const faturamentoData = keys.map(k => months[k].faturamento);
-  const gastoData = keys.map(k => months[k].gasto);
-  const msgsData = keys.map(k => months[k].msgs > 0 ? months[k].msgs : null);
-  const estimatedFlags = keys.map(k => months[k].estimado);
+  const keys = Object.keys(buckets).sort();
+  const labels = keys.map(labelFn);
+  const faturamentoData = keys.map(k => buckets[k].faturamento);
+  const gastoData = keys.map(k => buckets[k].gasto);
+  const msgsData = keys.map(k => buckets[k].msgs > 0 ? buckets[k].msgs : null);
+  const estimatedFlags = keys.map(k => buckets[k].estimado);
+
+  document.getElementById('mainChartSub').textContent =
+    `Comissão Tutory (Pago) · Investimento Meta · Conversas iniciadas no WhatsApp — ${isWeekly ? 'por semana' : 'por mês'}`;
 
   mainChartInstance = new Chart(ctx, {
     data:{
@@ -938,6 +939,15 @@ function renderLancamento(){
 }
 
 // ============================================================
+// TOGGLE DO GRÁFICO PRINCIPAL (Semanal / Mensal)
+document.getElementById('chartViewToggle').addEventListener('click', (e) => {
+  const btn = e.target.closest('button');
+  if (!btn) return;
+  chartGranularity = btn.dataset.granularity;
+  document.querySelectorAll('#chartViewToggle button').forEach(b => b.classList.toggle('active', b === btn));
+  renderMainChart(filterDaily(currentStart, currentEnd));
+});
+
 // TABS
 // ============================================================
 document.querySelectorAll('.tab-btn').forEach(btn => {

@@ -95,9 +95,7 @@
     border-radius:100px;
     color-scheme:dark;
   }
-  .filter-bar .presets{
-    display:flex; gap:6px; margin-left:4px;
-  }
+  .filter-bar .presets{ display:flex; gap:6px; margin-left:4px; }
   .preset-btn{
     background:transparent;
     border:1px solid var(--border);
@@ -117,19 +115,44 @@
     color:var(--white);
   }
 
+  /* ---------- Alertas ---------- */
+  .alerts{ display:flex; flex-direction:column; gap:8px; margin-bottom:18px; }
+  .alert{
+    display:flex; align-items:center; gap:10px;
+    border-radius:14px; padding:11px 16px; font-size:13px; line-height:1.45;
+    border:1px solid; background:rgba(255,255,255,.03);
+  }
+  .alert .ico{ font-size:15px; flex-shrink:0; }
+  .alert.warn{ border-color:rgba(240,136,32,.45); color:#F5B46B; }
+  .alert.danger{ border-color:rgba(248,48,48,.5); color:#FF7B7B; }
+  .alert.info{ border-color:rgba(59,130,246,.4); color:#8FB6F5; }
+
+  /* ---------- Toggle de visão ---------- */
+  .view-toggle{ display:flex; align-items:center; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
+  .view-toggle .vt-label{
+    font-family:'Space Mono', monospace; font-size:10.5px; text-transform:uppercase;
+    letter-spacing:1.4px; color:var(--white-55); margin-right:4px;
+  }
+  .view-btn{
+    background:transparent; border:1px solid var(--border); color:var(--white-80);
+    font-family:'Inter', sans-serif; font-size:12.5px; font-weight:700;
+    padding:8px 18px; border-radius:100px; cursor:pointer; transition:all .2s ease;
+  }
+  .view-btn:hover{ border-color:var(--border-strong); }
+  .view-btn.active{
+    background:linear-gradient(135deg, var(--purple-light), var(--purple-deep));
+    border-color:transparent; color:var(--white);
+  }
+
   /* ---------- Grid geral ---------- */
   .grid-kpi{
     display:grid;
-    grid-template-columns:repeat(4, 1fr);
+    grid-template-columns:repeat(3, 1fr);
     gap:16px;
     margin-bottom:16px;
   }
   .grid-mid{ margin-bottom:16px; }
-  .grid-bottom{
-    display:grid;
-    grid-template-columns:1fr 1fr 1.1fr;
-    gap:16px;
-  }
+  .grid-bottom{ display:grid; grid-template-columns:1fr 1fr 1.1fr; gap:16px; margin-bottom:16px; }
 
   .card{
     background:var(--bg-elev);
@@ -155,15 +178,14 @@
     text-transform:uppercase;
     color:var(--white-55);
     display:flex; align-items:center; gap:8px;
-    margin-bottom:14px;
+    margin-bottom:12px;
   }
   .kpi-icon{
     width:26px; height:26px;
     border-radius:8px;
     display:flex; align-items:center; justify-content:center;
     background:linear-gradient(135deg, var(--purple-light), var(--purple-deep));
-    font-size:12px;
-    flex-shrink:0;
+    font-size:12px; flex-shrink:0;
   }
   .kpi-value{
     font-family:'Space Mono', monospace;
@@ -178,33 +200,34 @@
     color:var(--white-35);
     font-family:'Inter', sans-serif;
   }
+  .kpi-delta{
+    display:inline-flex; align-items:center; gap:4px;
+    font-family:'Space Mono', monospace; font-size:11.5px; font-weight:700;
+    margin-left:8px; padding:2px 7px; border-radius:6px;
+  }
+  .kpi-delta.up{ color:var(--green); background:rgba(16,168,112,.12); }
+  .kpi-delta.down{ color:var(--red); background:rgba(248,48,48,.12); }
+  .kpi-delta.flat{ color:var(--white-55); background:rgba(255,255,255,.06); }
+  .kpi-bench{ margin-top:7px; height:4px; border-radius:3px; background:rgba(255,255,255,.07); overflow:hidden; }
+  .kpi-bench i{ display:block; height:100%; border-radius:3px; }
 
   /* ---------- Card headers ---------- */
   .card-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:18px;
-    gap:10px;
-    flex-wrap:wrap;
+    display:flex; justify-content:space-between; align-items:center;
+    margin-bottom:18px; gap:10px; flex-wrap:wrap;
   }
   .card-title{
     font-family:'Space Mono', monospace;
-    font-size:11px;
-    letter-spacing:1.6px;
-    text-transform:uppercase;
+    font-size:11px; letter-spacing:1.6px; text-transform:uppercase;
     color:var(--white-80);
   }
-  .card-sub{
-    font-size:11.5px;
-    color:var(--white-35);
-    margin-top:3px;
-  }
-  .legend{ display:flex; gap:16px; font-size:11.5px; color:var(--white-55); }
+  .card-sub{ font-size:11.5px; color:var(--white-35); margin-top:3px; }
+  .legend{ display:flex; gap:16px; font-size:11.5px; color:var(--white-55); flex-wrap:wrap; }
   .legend span{ display:flex; align-items:center; gap:6px; }
   .legend i{ width:9px; height:9px; border-radius:3px; display:inline-block; }
 
-  .chart-wrap{ height:280px; }
+  .chart-wrap{ height:300px; }
+  .chart-wrap.small{ height:240px; }
   .empty-note{
     color:var(--white-35); font-size:12.5px; text-align:center;
     padding:40px 0; font-family:'Space Mono', monospace;
@@ -238,6 +261,30 @@
   .funnel-stage .fs-value{ font-size:15px; font-weight:800; margin-top:3px; }
   .funnel-stage .fs-pct{ font-size:10px; color:rgba(255,255,255,.65); margin-top:2px; }
 
+  /* ---------- Tabela de transações ---------- */
+  .tx-list{ display:flex; flex-direction:column; }
+  .tx-row{
+    display:flex; align-items:center; gap:12px;
+    padding:10px 2px; border-bottom:1px solid var(--border); font-size:12.5px;
+  }
+  .tx-row:last-child{ border-bottom:none; }
+  .tx-row .tx-date{ font-family:'Space Mono', monospace; color:var(--white-55); font-size:11px; flex-shrink:0; }
+  .tx-row .tx-info{ flex:1; min-width:0; }
+  .tx-row .tx-info .tx-aluno{ color:var(--white); font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .tx-row .tx-info .tx-curso{ color:var(--white-35); font-size:11px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .tx-row .tx-val{ font-family:'Space Mono', monospace; font-weight:700; color:var(--white); flex-shrink:0; }
+  .badge{ display:inline-block; padding:2px 8px; border-radius:999px; font-size:10.5px; font-weight:700; flex-shrink:0; }
+  .badge.ok{ background:rgba(16,168,112,.16); color:var(--green); }
+  .badge.bad{ background:rgba(248,48,48,.16); color:var(--red); }
+  .badge.neu{ background:rgba(255,255,255,.08); color:var(--white-55); }
+
+  /* ---------- Rodapé ---------- */
+  .footer{
+    margin-top:28px; border-top:1px solid var(--border); padding-top:16px;
+    font-size:11.5px; color:var(--white-35); font-family:'Space Mono', monospace; line-height:1.8;
+  }
+  .footer b{ color:var(--white-55); }
+
   @media (max-width:1050px){
     .grid-kpi{ grid-template-columns:1fr 1fr; }
     .grid-bottom{ grid-template-columns:1fr; }
@@ -247,15 +294,22 @@
     .filter-bar{ width:100%; }
   }
 
-  .card, .topbar{ opacity:0; transform:translateY(10px); animation:fadeIn .5s ease forwards; }
-  .grid-kpi .card:nth-child(1){ animation-delay:.03s; }
-  .grid-kpi .card:nth-child(2){ animation-delay:.07s; }
-  .grid-kpi .card:nth-child(3){ animation-delay:.11s; }
-  .grid-kpi .card:nth-child(4){ animation-delay:.15s; }
-  .grid-mid .card{ animation-delay:.19s; }
-  .grid-bottom .card:nth-child(1){ animation-delay:.24s; }
-  .grid-bottom .card:nth-child(2){ animation-delay:.28s; }
-  .grid-bottom .card:nth-child(3){ animation-delay:.32s; }
+  .card, .topbar, .alerts, .view-toggle{ opacity:0; transform:translateY(10px); animation:fadeIn .5s ease forwards; }
+  .alerts{ animation-delay:.03s; }
+  .view-toggle{ animation-delay:.06s; }
+  .grid-kpi .card:nth-child(1){ animation-delay:.09s; }
+  .grid-kpi .card:nth-child(2){ animation-delay:.12s; }
+  .grid-kpi .card:nth-child(3){ animation-delay:.15s; }
+  .grid-kpi .card:nth-child(4){ animation-delay:.18s; }
+  .grid-kpi .card:nth-child(5){ animation-delay:.21s; }
+  .grid-kpi .card:nth-child(6){ animation-delay:.24s; }
+  .grid-kpi .card:nth-child(7){ animation-delay:.27s; }
+  .grid-kpi .card:nth-child(8){ animation-delay:.30s; }
+  .grid-kpi .card:nth-child(9){ animation-delay:.33s; }
+  .grid-mid .card{ animation-delay:.36s; }
+  .grid-bottom .card:nth-child(1){ animation-delay:.40s; }
+  .grid-bottom .card:nth-child(2){ animation-delay:.44s; }
+  .grid-bottom .card:nth-child(3){ animation-delay:.48s; }
   @keyframes fadeIn{ to{ opacity:1; transform:translateY(0); } }
 </style>
 </head>
@@ -263,7 +317,7 @@
 
 <div class="topbar">
   <div>
-    <h1>APROBATUM — DASHBOARD DE LANÇAMENTO</h1>
+    <h1>APROBATUM — DASHBOARD</h1>
     <p id="periodLabel">carregando período…</p>
   </div>
   <div class="filter-bar">
@@ -279,6 +333,14 @@
   </div>
 </div>
 
+<div class="alerts" id="alerts"></div>
+
+<div class="view-toggle">
+  <span class="vt-label">Visão</span>
+  <button class="view-btn active" data-view="perpetuo">Perpétuo</button>
+  <button class="view-btn" data-view="lancamento">Lançamento</button>
+</div>
+
 <div class="grid-kpi" id="kpiGrid"></div>
 
 <div class="grid-mid">
@@ -291,9 +353,11 @@
       <div class="legend">
         <span><i style="background:var(--purple-light)"></i>Faturamento</span>
         <span><i style="background:#FFFFFF"></i>Investimento</span>
+        <span><i style="background:rgba(255,255,255,.14)"></i>Sem dados</span>
       </div>
     </div>
     <div class="chart-wrap"><canvas id="mainChart"></canvas></div>
+    <div class="card-sub" id="mainChartNote" style="margin-top:10px"></div>
   </div>
 </div>
 
@@ -303,7 +367,7 @@
     <div class="card-head">
       <div>
         <div class="card-title">Vendas por Produto</div>
-        <div class="card-sub">Todos os carrinhos — somente Pago</div>
+        <div class="card-sub">Todos os cursos — somente Pago</div>
       </div>
     </div>
     <div class="donut-wrap">
@@ -312,6 +376,30 @@
     </div>
     <div class="legend-list" id="donutLegend"></div>
   </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">Top Campanhas por ROAS</div>
+        <div class="card-sub">Melhores · ROAS do pixel Meta</div>
+      </div>
+    </div>
+    <div id="topRoasBars"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">Funil do Perpétuo</div>
+        <div class="card-sub">Investimento até compra</div>
+      </div>
+    </div>
+    <div class="funnel" id="funnel"></div>
+  </div>
+
+</div>
+
+<div class="grid-bottom">
 
   <div class="card">
     <div class="card-head">
@@ -326,25 +414,37 @@
   <div class="card">
     <div class="card-head">
       <div>
-        <div class="card-title">Funil de Tráfego</div>
-        <div class="card-sub">Alcance até venda</div>
+        <div class="card-title">Piores ROAS</div>
+        <div class="card-sub">Menor retorno por investimento (pixel)</div>
       </div>
     </div>
-    <div class="funnel" id="funnel"></div>
+    <div id="worstRoasBars"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">Últimas Transações</div>
+        <div class="card-sub">Tutory · 10 mais recentes</div>
+      </div>
+    </div>
+    <div class="tx-list" id="txList"></div>
   </div>
 
 </div>
 
+<div class="footer" id="footer"></div>
+
+<script src="dados.js"></script>
 <script>
 /* ============================================================
-   DADOS — vindos de Meta Ads (campanhas), Tutory (vendas) e
-   formulário de leads. Já agregados por dia / campanha / produto.
+   Dashboard Aprobatum — consome DADOS (gerado pelo etl.py)
    ============================================================ */
-const RAW = {"daily": [{"date": "2026-06-01", "gasto": 285.97, "alcance": 26350, "cliques": 94, "lp_views": 0, "faturamento": 0.0, "vendas": 0, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-06-02", "gasto": 259.17, "alcance": 23184, "cliques": 113, "lp_views": 0, "faturamento": 1872.5, "vendas": 2, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-06-03", "gasto": 262.53, "alcance": 21406, "cliques": 101, "lp_views": 0, "faturamento": 2896.0, "vendas": 2, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-06-04", "gasto": 232.52, "alcance": 20472, "cliques": 90, "lp_views": 0, "faturamento": 0.0, "vendas": 0, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-06-05", "gasto": 242.25, "alcance": 21082, "cliques": 85, "lp_views": 0, "faturamento": 0.0, "vendas": 0, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-06-06", "gasto": 321.21, "alcance": 25385, "cliques": 97, "lp_views": 0, "faturamento": 825.42, "vendas": 2, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-06-07", "gasto": 278.2, "alcance": 22057, "cliques": 86, "lp_views": 0, "faturamento": 1527.3, "vendas": 1, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-06-08", "gasto": 310.04, "alcance": 22889, "cliques": 75, "lp_views": 0, "faturamento": 0.0, "vendas": 0, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-06-09", "gasto": 307.95, "alcance": 24178, "cliques": 112, "lp_views": 0, "faturamento": 0.0, "vendas": 0, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-06-10", "gasto": 277.63, "alcance": 22798, "cliques": 82, "lp_views": 0, "faturamento": 1697.0, "vendas": 1, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-06-11", "gasto": 230.64, "alcance": 17048, "cliques": 64, "lp_views": 0, "faturamento": 3583.0, "vendas": 3, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-06-12", "gasto": 213.62, "alcance": 19674, "cliques": 63, "lp_views": 0, "faturamento": 1896.0, "vendas": 2, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-06-13", "gasto": 222.02, "alcance": 22984, "cliques": 77, "lp_views": 0, "faturamento": 0.0, "vendas": 0, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-06-14", "gasto": 235.8, "alcance": 20127, "cliques": 72, "lp_views": 0, "faturamento": 0.0, "vendas": 0, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-06-15", "gasto": 297.84, "alcance": 21217, "cliques": 93, "lp_views": 0, "faturamento": 1297.0, "vendas": 1, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-06-16", "gasto": 295.56, "alcance": 20743, "cliques": 113, "lp_views": 0, "faturamento": 3183.9, "vendas": 3, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-06-17", "gasto": 261.52, "alcance": 17618, "cliques": 119, "lp_views": 0, "faturamento": 1697.0, "vendas": 1, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-06-18", "gasto": 242.41, "alcance": 15836, "cliques": 95, "lp_views": 0, "faturamento": 5662.68, "vendas": 4, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-06-19", "gasto": 228.95, "alcance": 14634, "cliques": 105, "lp_views": 0, "faturamento": 0.0, "vendas": 0, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-06-20", "gasto": 287.26, "alcance": 23089, "cliques": 145, "lp_views": 0, "faturamento": 0.0, "vendas": 0, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-06-21", "gasto": 259.92, "alcance": 17853, "cliques": 99, "lp_views": 0, "faturamento": 0.0, "vendas": 0, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-06-22", "gasto": 317.36, "alcance": 20882, "cliques": 124, "lp_views": 0, "faturamento": 0.0, "vendas": 0, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-06-23", "gasto": 277.27, "alcance": 18650, "cliques": 91, "lp_views": 0, "faturamento": 0.0, "vendas": 0, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-06-24", "gasto": 221.02, "alcance": 15024, "cliques": 93, "lp_views": 0, "faturamento": 0.0, "vendas": 0, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-06-25", "gasto": 227.43, "alcance": 17651, "cliques": 87, "lp_views": 0, "faturamento": 1297.0, "vendas": 1, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-06-26", "gasto": 209.34, "alcance": 15587, "cliques": 87, "lp_views": 0, "faturamento": 2200.8, "vendas": 2, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-06-27", "gasto": 265.78, "alcance": 19942, "cliques": 85, "lp_views": 0, "faturamento": 0.0, "vendas": 0, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-06-28", "gasto": 251.22, "alcance": 19693, "cliques": 89, "lp_views": 0, "faturamento": 0.0, "vendas": 0, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-06-29", "gasto": 267.66, "alcance": 24683, "cliques": 100, "lp_views": 0, "faturamento": 0.0, "vendas": 0, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-06-30", "gasto": 263.19, "alcance": 21073, "cliques": 112, "lp_views": 0, "faturamento": 1697.0, "vendas": 1, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-07-01", "gasto": 256.93, "alcance": 21917, "cliques": 93, "lp_views": 0, "faturamento": 0.0, "vendas": 0, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-07-02", "gasto": 229.48, "alcance": 17935, "cliques": 83, "lp_views": 0, "faturamento": 0.0, "vendas": 0, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-07-03", "gasto": 206.7, "alcance": 17127, "cliques": 89, "lp_views": 0, "faturamento": 0.0, "vendas": 0, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-07-04", "gasto": 255.13, "alcance": 22922, "cliques": 107, "lp_views": 0, "faturamento": 0.0, "vendas": 0, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-07-05", "gasto": 226.9, "alcance": 17730, "cliques": 105, "lp_views": 0, "faturamento": 3852.2, "vendas": 4, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-07-06", "gasto": 264.01, "alcance": 20458, "cliques": 108, "lp_views": 0, "faturamento": 151.92, "vendas": 1, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-07-07", "gasto": 266.47, "alcance": 20149, "cliques": 80, "lp_views": 0, "faturamento": 1187.9, "vendas": 1, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-07-08", "gasto": 264.44, "alcance": 22490, "cliques": 96, "lp_views": 0, "faturamento": 1297.0, "vendas": 1, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-07-09", "gasto": 224.33, "alcance": 19098, "cliques": 112, "lp_views": 0, "faturamento": 0.0, "vendas": 0, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-07-10", "gasto": 219.22, "alcance": 18122, "cliques": 83, "lp_views": 0, "faturamento": 189.0, "vendas": 1, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-07-11", "gasto": 259.18, "alcance": 25583, "cliques": 132, "lp_views": 0, "faturamento": 199.0, "vendas": 1, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-07-12", "gasto": 253.05, "alcance": 22292, "cliques": 100, "lp_views": 0, "faturamento": 0.0, "vendas": 0, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-07-13", "gasto": 273.13, "alcance": 21600, "cliques": 99, "lp_views": 0, "faturamento": 1697.0, "vendas": 1, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-07-14", "gasto": 248.25, "alcance": 18549, "cliques": 101, "lp_views": 0, "faturamento": 1697.0, "vendas": 1, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-07-15", "gasto": 222.65, "alcance": 15465, "cliques": 79, "lp_views": 0, "faturamento": 1297.9, "vendas": 1, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-07-16", "gasto": 241.72, "alcance": 16600, "cliques": 87, "lp_views": 0, "faturamento": 189.9, "vendas": 1, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-07-17", "gasto": 225.18, "alcance": 17146, "cliques": 84, "lp_views": 0, "faturamento": 1297.0, "vendas": 1, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-07-18", "gasto": 270.19, "alcance": 24151, "cliques": 98, "lp_views": 0, "faturamento": 1697.0, "vendas": 1, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-07-19", "gasto": 225.54, "alcance": 18164, "cliques": 84, "lp_views": 0, "faturamento": 0.0, "vendas": 0, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-07-20", "gasto": 280.43, "alcance": 19824, "cliques": 106, "lp_views": 0, "faturamento": 0.0, "vendas": 0, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-07-21", "gasto": 266.57, "alcance": 17209, "cliques": 93, "lp_views": 0, "faturamento": 0.0, "vendas": 0, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-07-22", "gasto": 236.78, "alcance": 14746, "cliques": 87, "lp_views": 0, "faturamento": 1297.9, "vendas": 2, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-07-23", "gasto": 222.93, "alcance": 12982, "cliques": 75, "lp_views": 0, "faturamento": 0.0, "vendas": 0, "leads": 3, "leads_pago": 0, "leads_organico": 3}, {"date": "2026-07-24", "gasto": 353.5, "alcance": 19237, "cliques": 134, "lp_views": 31, "faturamento": 0.0, "vendas": 0, "leads": 8, "leads_pago": 4, "leads_organico": 4}, {"date": "2026-07-25", "gasto": 381.63, "alcance": 24723, "cliques": 141, "lp_views": 30, "faturamento": 0.0, "vendas": 0, "leads": 5, "leads_pago": 2, "leads_organico": 3}, {"date": "2026-07-26", "gasto": 435.27, "alcance": 25924, "cliques": 157, "lp_views": 70, "faturamento": 0.0, "vendas": 0, "leads": 7, "leads_pago": 3, "leads_organico": 4}, {"date": "2026-07-27", "gasto": 449.78, "alcance": 24677, "cliques": 144, "lp_views": 46, "faturamento": 0.0, "vendas": 0, "leads": 4, "leads_pago": 2, "leads_organico": 2}, {"date": "2026-07-28", "gasto": 400.81, "alcance": 19760, "cliques": 117, "lp_views": 36, "faturamento": 0.0, "vendas": 0, "leads": 53, "leads_pago": 26, "leads_organico": 27}, {"date": "2026-07-29", "gasto": 464.8, "alcance": 24933, "cliques": 162, "lp_views": 57, "faturamento": 0.0, "vendas": 0, "leads": 18, "leads_pago": 9, "leads_organico": 9}, {"date": "2026-07-30", "gasto": 260.83, "alcance": 15080, "cliques": 97, "lp_views": 24, "faturamento": 0.0, "vendas": 0, "leads": 5, "leads_pago": 2, "leads_organico": 3}, {"date": "2026-07-31", "gasto": 315.26, "alcance": 20774, "cliques": 120, "lp_views": 55, "faturamento": 1297.0, "vendas": 1, "leads": 41, "leads_pago": 20, "leads_organico": 21}, {"date": "2026-08-01", "gasto": 506.77, "alcance": 31717, "cliques": 225, "lp_views": 125, "faturamento": 0.0, "vendas": 0, "leads": 51, "leads_pago": 25, "leads_organico": 26}, {"date": "2026-08-02", "gasto": 541.01, "alcance": 32549, "cliques": 308, "lp_views": 204, "faturamento": 0.0, "vendas": 0, "leads": 46, "leads_pago": 23, "leads_organico": 23}, {"date": "2026-08-03", "gasto": 553.74, "alcance": 34093, "cliques": 237, "lp_views": 100, "faturamento": 2056.5, "vendas": 3, "leads": 58, "leads_pago": 29, "leads_organico": 29}, {"date": "2026-08-04", "gasto": 578.41, "alcance": 29105, "cliques": 287, "lp_views": 155, "faturamento": 2375.8, "vendas": 2, "leads": 25, "leads_pago": 12, "leads_organico": 13}, {"date": "2026-08-05", "gasto": 594.03, "alcance": 34093, "cliques": 409, "lp_views": 79, "faturamento": 3175.58, "vendas": 4, "leads": 9, "leads_pago": 4, "leads_organico": 5}, {"date": "2026-08-06", "gasto": 433.09, "alcance": 23617, "cliques": 234, "lp_views": 10, "faturamento": 151.92, "vendas": 1, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-08-07", "gasto": 373.7, "alcance": 22253, "cliques": 176, "lp_views": 89, "faturamento": 0.0, "vendas": 0, "leads": 49, "leads_pago": 24, "leads_organico": 25}, {"date": "2026-08-08", "gasto": 1164.19, "alcance": 136981, "cliques": 628, "lp_views": 390, "faturamento": 4242.65, "vendas": 3, "leads": 6, "leads_pago": 3, "leads_organico": 3}, {"date": "2026-08-09", "gasto": 1350.67, "alcance": 104747, "cliques": 609, "lp_views": 431, "faturamento": 0.0, "vendas": 0, "leads": 22, "leads_pago": 11, "leads_organico": 11}, {"date": "2026-08-10", "gasto": 1164.28, "alcance": 321010, "cliques": 687, "lp_views": 166, "faturamento": 681.86, "vendas": 2, "leads": 58, "leads_pago": 29, "leads_organico": 29}, {"date": "2026-08-11", "gasto": 519.8, "alcance": 24974, "cliques": 268, "lp_views": 30, "faturamento": 16780.46, "vendas": 12, "leads": 31, "leads_pago": 15, "leads_organico": 16}, {"date": "2026-08-12", "gasto": 214.5, "alcance": 13235, "cliques": 81, "lp_views": 0, "faturamento": 39124.04, "vendas": 27, "leads": 1, "leads_pago": 1, "leads_organico": 0}, {"date": "2026-08-13", "gasto": 204.23, "alcance": 12802, "cliques": 73, "lp_views": 7, "faturamento": 6885.6, "vendas": 5, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-08-14", "gasto": 168.43, "alcance": 10293, "cliques": 78, "lp_views": 5, "faturamento": 0.0, "vendas": 0, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-08-15", "gasto": 215.96, "alcance": 15591, "cliques": 90, "lp_views": 16, "faturamento": 1747.0, "vendas": 1, "leads": 1, "leads_pago": 1, "leads_organico": 0}, {"date": "2026-08-16", "gasto": 220.95, "alcance": 17801, "cliques": 82, "lp_views": 8, "faturamento": 1936.9, "vendas": 2, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-08-17", "gasto": 242.17, "alcance": 16488, "cliques": 87, "lp_views": 16, "faturamento": 0.0, "vendas": 0, "leads": 1, "leads_pago": 1, "leads_organico": 0}, {"date": "2026-08-18", "gasto": 275.89, "alcance": 16572, "cliques": 91, "lp_views": 28, "faturamento": 1247.0, "vendas": 1, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-08-19", "gasto": 274.61, "alcance": 20851, "cliques": 113, "lp_views": 30, "faturamento": 0.0, "vendas": 0, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-08-20", "gasto": 246.21, "alcance": 8251, "cliques": 91, "lp_views": 21, "faturamento": 0.0, "vendas": 0, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-08-21", "gasto": 246.21, "alcance": 8251, "cliques": 91, "lp_views": 21, "faturamento": 1739.86, "vendas": 2, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-08-22", "gasto": 246.21, "alcance": 8251, "cliques": 91, "lp_views": 21, "faturamento": 0.0, "vendas": 0, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-08-23", "gasto": 246.21, "alcance": 8251, "cliques": 91, "lp_views": 21, "faturamento": 0.0, "vendas": 0, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-08-24", "gasto": 246.21, "alcance": 8251, "cliques": 91, "lp_views": 21, "faturamento": 0.0, "vendas": 0, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-08-25", "gasto": 246.21, "alcance": 8251, "cliques": 91, "lp_views": 21, "faturamento": 1247.0, "vendas": 1, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-08-26", "gasto": 246.21, "alcance": 8251, "cliques": 91, "lp_views": 21, "faturamento": 0.0, "vendas": 0, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-08-27", "gasto": 246.21, "alcance": 8251, "cliques": 91, "lp_views": 21, "faturamento": 0.0, "vendas": 0, "leads": 0, "leads_pago": 0, "leads_organico": 0}, {"date": "2026-08-28", "gasto": 246.21, "alcance": 8251, "cliques": 91, "lp_views": 21, "faturamento": 180.0, "vendas": 1, "leads": 0, "leads_pago": 0, "leads_organico": 0}], "campanhas": [{"date": "2026-08-19", "campanha": "[PERPETUO] [VENDAS] [QUENTE] - 13/08/26", "gasto": 53.16}, {"date": "2026-08-19", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 111.8}, {"date": "2026-08-19", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 109.65}, {"date": "2026-08-18", "campanha": "[PERPETUO] [VENDAS] [QUENTE] - 13/08/26", "gasto": 52.73}, {"date": "2026-08-18", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 107.27}, {"date": "2026-08-18", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 115.89}, {"date": "2026-08-17", "campanha": "[PERPETUO] [VENDAS] [QUENTE] - 13/08/26", "gasto": 42.5}, {"date": "2026-08-17", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 100.93}, {"date": "2026-08-17", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 98.74}, {"date": "2026-08-16", "campanha": "[PERPETUO] [VENDAS] [QUENTE] - 13/08/26", "gasto": 17.77}, {"date": "2026-08-16", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 108.81}, {"date": "2026-08-16", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 94.37}, {"date": "2026-08-15", "campanha": "[PERPETUO] [VENDAS] [QUENTE] - 13/08/26", "gasto": 26.14}, {"date": "2026-08-15", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 106.99}, {"date": "2026-08-15", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 82.83}, {"date": "2026-08-14", "campanha": "[PERPETUO] [VENDAS] [QUENTE] - 13/08/26", "gasto": 11.48}, {"date": "2026-08-14", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 78.56}, {"date": "2026-08-14", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 78.39}, {"date": "2026-08-13", "campanha": "[PERPETUO] [VENDAS] [QUENTE] - 13/08/26", "gasto": 5.8}, {"date": "2026-08-13", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 100.61}, {"date": "2026-08-13", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 97.82}, {"date": "2026-08-12", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 108.32}, {"date": "2026-08-12", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 106.18}, {"date": "2026-08-11", "campanha": "[L01] [O DECRETO PMDF/PMG] [CAPTAÇÃO] - 23/07/26", "gasto": 292.39}, {"date": "2026-08-11", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 111.39}, {"date": "2026-08-11", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 116.02}, {"date": "2026-08-10", "campanha": "[L01] [O DECRETO PMDF/PMG] [LEMBRETE] - 08/08/26", "gasto": 597.56}, {"date": "2026-08-10", "campanha": "[L01] [O DECRETO PMDF/PMG] [CAPTAÇÃO] - 23/07/26", "gasto": 338.15}, {"date": "2026-08-10", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 108.34}, {"date": "2026-08-10", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 120.23}, {"date": "2026-08-09", "campanha": "[L01] [O DECRETO PMDF/PMG] [LEMBRETE] - 08/08/26", "gasto": 700.0}, {"date": "2026-08-09", "campanha": "[L01] [O DECRETO PMDF/PMG] [CAPTAÇÃO] - 23/07/26", "gasto": 478.33}, {"date": "2026-08-09", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 82.97}, {"date": "2026-08-09", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 89.37}, {"date": "2026-08-08", "campanha": "[L01] [O DECRETO PMDF/PMG] [LEMBRETE] - 08/08/26", "gasto": 499.84}, {"date": "2026-08-08", "campanha": "[L01] [O DECRETO PMDF/PMG] [CAPTAÇÃO] - 23/07/26", "gasto": 502.64}, {"date": "2026-08-08", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 78.19}, {"date": "2026-08-08", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 83.52}, {"date": "2026-08-07", "campanha": "[L01] [O DECRETO PMDF/PMG] [CAPTAÇÃO] - 23/07/26", "gasto": 207.23}, {"date": "2026-08-07", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 84.75}, {"date": "2026-08-07", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 81.72}, {"date": "2026-08-06", "campanha": "[L01] [O DECRETO PMDF/PMG] [CAPTAÇÃO] - 23/07/26", "gasto": 271.54}, {"date": "2026-08-06", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 80.59}, {"date": "2026-08-06", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 80.96}, {"date": "2026-08-05", "campanha": "[L01] [O DECRETO PMDF/PMG] [CAPTAÇÃO] - 23/07/26", "gasto": 364.13}, {"date": "2026-08-05", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 116.07}, {"date": "2026-08-05", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 113.83}, {"date": "2026-08-04", "campanha": "[L01] [O DECRETO PMDF/PMG] [CAPTAÇÃO] - 23/07/26", "gasto": 341.78}, {"date": "2026-08-04", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 119.0}, {"date": "2026-08-04", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 117.63}, {"date": "2026-08-03", "campanha": "[L01] [O DECRETO PMDF/PMG] [CAPTAÇÃO] - 23/07/26", "gasto": 305.64}, {"date": "2026-08-03", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 126.89}, {"date": "2026-08-03", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 121.21}, {"date": "2026-08-02", "campanha": "[L01] [O DECRETO PMDF/PMG] [CAPTAÇÃO] - 23/07/26", "gasto": 363.41}, {"date": "2026-08-02", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 87.73}, {"date": "2026-08-02", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 89.87}, {"date": "2026-08-01", "campanha": "[L01] [O DECRETO PMDF/PMG] [CAPTAÇÃO] - 23/07/26", "gasto": 304.88}, {"date": "2026-08-01", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 105.13}, {"date": "2026-08-01", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 96.76}, {"date": "2026-07-31", "campanha": "[L01] [O DECRETO PMDF/PMG] [CAPTAÇÃO] - 23/07/26", "gasto": 157.07}, {"date": "2026-07-31", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 78.55}, {"date": "2026-07-31", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 79.64}, {"date": "2026-07-30", "campanha": "[L01] [O DECRETO PMDF/PMG] [CAPTAÇÃO] - 23/07/26", "gasto": 97.51}, {"date": "2026-07-30", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 79.41}, {"date": "2026-07-30", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 83.91}, {"date": "2026-07-29", "campanha": "[L01] [O DECRETO PMDF/PMG] [CAPTAÇÃO] - 23/07/26", "gasto": 246.35}, {"date": "2026-07-29", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 114.84}, {"date": "2026-07-29", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 103.61}, {"date": "2026-07-28", "campanha": "[L01] [O DECRETO PMDF/PMG] [CAPTAÇÃO] - 23/07/26", "gasto": 175.75}, {"date": "2026-07-28", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 15.28}, {"date": "2026-07-28", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 98.05}, {"date": "2026-07-28", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 111.73}, {"date": "2026-07-27", "campanha": "[L01] [O DECRETO PMDF/PMG] [CAPTAÇÃO] - 23/07/26", "gasto": 154.62}, {"date": "2026-07-27", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 50.72}, {"date": "2026-07-27", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 119.37}, {"date": "2026-07-27", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 125.07}, {"date": "2026-07-26", "campanha": "[L01] [O DECRETO PMDF/PMG] [CAPTAÇÃO] - 23/07/26", "gasto": 189.19}, {"date": "2026-07-26", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 49.59}, {"date": "2026-07-26", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 100.8}, {"date": "2026-07-26", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 95.69}, {"date": "2026-07-25", "campanha": "[L01] [O DECRETO PMDF/PMG] [CAPTAÇÃO] - 23/07/26", "gasto": 109.82}, {"date": "2026-07-25", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 47.73}, {"date": "2026-07-25", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 118.99}, {"date": "2026-07-25", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 105.09}, {"date": "2026-07-24", "campanha": "[L01] [O DECRETO PMDF/PMG] [CAPTAÇÃO] - 23/07/26", "gasto": 128.14}, {"date": "2026-07-24", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 47.21}, {"date": "2026-07-24", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 88.97}, {"date": "2026-07-24", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 89.18}, {"date": "2026-07-23", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 46.26}, {"date": "2026-07-23", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 85.56}, {"date": "2026-07-23", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 91.11}, {"date": "2026-07-22", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 47.05}, {"date": "2026-07-22", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 92.77}, {"date": "2026-07-22", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 96.96}, {"date": "2026-07-21", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 47.57}, {"date": "2026-07-21", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 109.2}, {"date": "2026-07-21", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 109.8}, {"date": "2026-07-20", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 50.09}, {"date": "2026-07-20", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 116.1}, {"date": "2026-07-20", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 114.24}, {"date": "2026-07-19", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 50.03}, {"date": "2026-07-19", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 85.74}, {"date": "2026-07-19", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 89.77}, {"date": "2026-07-18", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 48.8}, {"date": "2026-07-18", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 112.23}, {"date": "2026-07-18", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 109.16}, {"date": "2026-07-17", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 46.55}, {"date": "2026-07-17", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 93.82}, {"date": "2026-07-17", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 84.81}, {"date": "2026-07-16", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 46.12}, {"date": "2026-07-16", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 100.69}, {"date": "2026-07-16", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 94.91}, {"date": "2026-07-15", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 47.52}, {"date": "2026-07-15", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 87.46}, {"date": "2026-07-15", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 87.67}, {"date": "2026-07-14", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 48.39}, {"date": "2026-07-14", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 94.92}, {"date": "2026-07-14", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 104.94}, {"date": "2026-07-13", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 49.16}, {"date": "2026-07-13", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 108.37}, {"date": "2026-07-13", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 115.6}, {"date": "2026-07-12", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 49.46}, {"date": "2026-07-12", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 101.73}, {"date": "2026-07-12", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 101.86}, {"date": "2026-07-11", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 50.28}, {"date": "2026-07-11", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 105.81}, {"date": "2026-07-11", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 103.09}, {"date": "2026-07-10", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 46.89}, {"date": "2026-07-10", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 87.98}, {"date": "2026-07-10", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 84.35}, {"date": "2026-07-09", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 47.68}, {"date": "2026-07-09", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 83.88}, {"date": "2026-07-09", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 92.77}, {"date": "2026-07-08", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 48.04}, {"date": "2026-07-08", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 107.14}, {"date": "2026-07-08", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 109.26}, {"date": "2026-07-07", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 48.82}, {"date": "2026-07-07", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 108.82}, {"date": "2026-07-07", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 108.83}, {"date": "2026-07-06", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 44.13}, {"date": "2026-07-06", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 110.22}, {"date": "2026-07-06", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 109.66}, {"date": "2026-07-05", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 50.16}, {"date": "2026-07-05", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 90.19}, {"date": "2026-07-05", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 86.55}, {"date": "2026-07-04", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 47.47}, {"date": "2026-07-04", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 108.97}, {"date": "2026-07-04", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 98.69}, {"date": "2026-07-03", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 47.84}, {"date": "2026-07-03", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 80.17}, {"date": "2026-07-03", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 78.69}, {"date": "2026-07-02", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 47.54}, {"date": "2026-07-02", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 85.97}, {"date": "2026-07-02", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 95.97}, {"date": "2026-07-01", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 47.5}, {"date": "2026-07-01", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 104.24}, {"date": "2026-07-01", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 105.19}, {"date": "2026-06-30", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 48.41}, {"date": "2026-06-30", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 108.23}, {"date": "2026-06-30", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 106.55}, {"date": "2026-06-29", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 49.82}, {"date": "2026-06-29", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 108.1}, {"date": "2026-06-29", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 109.74}, {"date": "2026-06-28", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 47.27}, {"date": "2026-06-28", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 102.55}, {"date": "2026-06-28", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 101.4}, {"date": "2026-06-27", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 57.81}, {"date": "2026-06-27", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 106.15}, {"date": "2026-06-27", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 101.82}, {"date": "2026-06-26", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 46.42}, {"date": "2026-06-26", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 79.83}, {"date": "2026-06-26", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 83.09}, {"date": "2026-06-25", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 49.25}, {"date": "2026-06-25", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 88.25}, {"date": "2026-06-25", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 89.93}, {"date": "2026-06-24", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 48.02}, {"date": "2026-06-24", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 87.66}, {"date": "2026-06-24", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 85.34}, {"date": "2026-06-23", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 51.2}, {"date": "2026-06-23", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 111.95}, {"date": "2026-06-23", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 114.12}, {"date": "2026-06-22", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 69.69}, {"date": "2026-06-22", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 124.14}, {"date": "2026-06-22", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 123.53}, {"date": "2026-06-21", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 58.22}, {"date": "2026-06-21", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 101.82}, {"date": "2026-06-21", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 99.88}, {"date": "2026-06-20", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 60.05}, {"date": "2026-06-20", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 115.78}, {"date": "2026-06-20", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 111.43}, {"date": "2026-06-19", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 60.68}, {"date": "2026-06-19", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 84.18}, {"date": "2026-06-19", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 84.09}, {"date": "2026-06-18", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 60.35}, {"date": "2026-06-18", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 86.89}, {"date": "2026-06-18", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 95.17}, {"date": "2026-06-17", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 61.42}, {"date": "2026-06-17", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 96.4}, {"date": "2026-06-17", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 103.7}, {"date": "2026-06-16", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 74.49}, {"date": "2026-06-16", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 109.38}, {"date": "2026-06-16", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 111.69}, {"date": "2026-06-15", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 74.78}, {"date": "2026-06-15", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 117.95}, {"date": "2026-06-15", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 105.11}, {"date": "2026-06-14", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 62.33}, {"date": "2026-06-14", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 87.65}, {"date": "2026-06-14", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 85.82}, {"date": "2026-06-13", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 49.87}, {"date": "2026-06-13", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 89.25}, {"date": "2026-06-13", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 82.9}, {"date": "2026-06-12", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 54.17}, {"date": "2026-06-12", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 81.49}, {"date": "2026-06-12", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 77.96}, {"date": "2026-06-11", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 55.28}, {"date": "2026-06-11", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 84.23}, {"date": "2026-06-11", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 91.13}, {"date": "2026-06-10", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 69.35}, {"date": "2026-06-10", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 104.92}, {"date": "2026-06-10", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 103.36}, {"date": "2026-06-09", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 74.27}, {"date": "2026-06-09", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 116.95}, {"date": "2026-06-09", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 116.73}, {"date": "2026-06-08", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 76.84}, {"date": "2026-06-08", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 112.29}, {"date": "2026-06-08", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 120.91}, {"date": "2026-06-07", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 73.73}, {"date": "2026-06-07", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 100.89}, {"date": "2026-06-07", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 103.58}, {"date": "2026-06-06", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 98.74}, {"date": "2026-06-06", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 108.98}, {"date": "2026-06-06", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 113.49}, {"date": "2026-06-05", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 70.35}, {"date": "2026-06-05", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 86.34}, {"date": "2026-06-05", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 85.56}, {"date": "2026-06-04", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 63.97}, {"date": "2026-06-04", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 85.64}, {"date": "2026-06-04", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 82.91}, {"date": "2026-06-03", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 65.35}, {"date": "2026-06-03", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 99.89}, {"date": "2026-06-03", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 97.29}, {"date": "2026-06-02", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 55.9}, {"date": "2026-06-02", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 98.25}, {"date": "2026-06-02", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 105.02}, {"date": "2026-06-01", "campanha": "[PMDF] [ENGAJAMENTO] [WPP] [QUENTE] - 29/06/26", "gasto": 48.48}, {"date": "2026-06-01", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 117.07}, {"date": "2026-06-01", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 120.42}, {"date": "2026-08-20", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 95.0}, {"date": "2026-08-21", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 95.0}, {"date": "2026-08-22", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 95.0}, {"date": "2026-08-23", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 95.0}, {"date": "2026-08-24", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 95.0}, {"date": "2026-08-25", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 95.0}, {"date": "2026-08-26", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 95.0}, {"date": "2026-08-27", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 95.0}, {"date": "2026-08-28", "campanha": "[PMDF] Venda Direta WhatsApp 1 [Engajamento msg]", "gasto": 95.0}, {"date": "2026-08-20", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 92.48}, {"date": "2026-08-21", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 92.48}, {"date": "2026-08-22", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 92.48}, {"date": "2026-08-23", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 92.48}, {"date": "2026-08-24", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 92.48}, {"date": "2026-08-25", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 92.48}, {"date": "2026-08-26", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 92.48}, {"date": "2026-08-27", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 92.48}, {"date": "2026-08-28", "campanha": "[PMDF] Venda direta WhatsApp 2 [engajamento]", "gasto": 92.48}, {"date": "2026-08-20", "campanha": "[PERPETUO] [VENDAS] [QUENTE] - 13/08/26", "gasto": 58.72}, {"date": "2026-08-21", "campanha": "[PERPETUO] [VENDAS] [QUENTE] - 13/08/26", "gasto": 58.72}, {"date": "2026-08-22", "campanha": "[PERPETUO] [VENDAS] [QUENTE] - 13/08/26", "gasto": 58.72}, {"date": "2026-08-23", "campanha": "[PERPETUO] [VENDAS] [QUENTE] - 13/08/26", "gasto": 58.72}, {"date": "2026-08-24", "campanha": "[PERPETUO] [VENDAS] [QUENTE] - 13/08/26", "gasto": 58.72}, {"date": "2026-08-25", "campanha": "[PERPETUO] [VENDAS] [QUENTE] - 13/08/26", "gasto": 58.72}, {"date": "2026-08-26", "campanha": "[PERPETUO] [VENDAS] [QUENTE] - 13/08/26", "gasto": 58.72}, {"date": "2026-08-27", "campanha": "[PERPETUO] [VENDAS] [QUENTE] - 13/08/26", "gasto": 58.72}, {"date": "2026-08-28", "campanha": "[PERPETUO] [VENDAS] [QUENTE] - 13/08/26", "gasto": 58.72}], "produtos": [{"date": "2026-08-16", "produto": "Decreto PMDF/PMGO — 12 meses", "valor": 1747.0}, {"date": "2026-08-16", "produto": "CFP PMDF 2.0 — recorrente", "valor": 189.9}, {"date": "2026-08-15", "produto": "Decreto PMDF/PMGO — 12 meses", "valor": 1747.0}, {"date": "2026-08-13", "produto": "Decreto PMDF/PMGO — 6 meses", "valor": 1247.0}, {"date": "2026-08-13", "produto": "Decreto PMDF/PMGO — 6 meses", "valor": 1247.0}, {"date": "2026-08-13", "produto": "Decreto PMDF/PMGO — 12 meses", "valor": 1397.6}, {"date": "2026-08-13", "produto": "Decreto PMDF/PMGO — 12 meses", "valor": 1747.0}, {"date": "2026-08-13", "produto": "Decreto PMDF/PMGO — 6 meses", "valor": 1247.0}, {"date": "2026-08-12", "produto": "Decreto PMDF/PMGO — 6 meses", "valor": 1147.0}, {"date": "2026-08-12", "produto": "Decreto PMDF/PMGO — 12 meses", "valor": 1647.0}, {"date": "2026-08-12", "produto": "Decreto PMDF/PMGO — 6 meses", "valor": 1147.0}, {"date": "2026-08-12", "produto": "Decreto PMDF/PMGO — 12 meses", "valor": 1564.65}, {"date": "2026-08-12", "produto": "Decreto PMDF/PMGO — 12 meses", "valor": 1564.65}, {"date": "2026-08-12", "produto": "Decreto PMDF/PMGO — 12 meses", "valor": 1647.0}, {"date": "2026-08-12", "produto": "Decreto PMDF/PMGO — 12 meses", "valor": 1564.65}, {"date": "2026-08-12", "produto": "Decreto PMDF/PMGO — 12 meses", "valor": 1564.65}, {"date": "2026-08-12", "produto": "Decreto PMDF/PMGO — 12 meses", "valor": 1564.65}, {"date": "2026-08-12", "produto": "Decreto PMDF/PMGO — 12 meses", "valor": 1564.65}, {"date": "2026-08-12", "produto": "Decreto PMDF/PMGO — 12 meses", "valor": 1647.0}, {"date": "2026-08-12", "produto": "Decreto PMDF/PMGO — 6 meses", "valor": 1147.0}, {"date": "2026-08-12", "produto": "Decreto PMDF/PMGO — 12 meses", "valor": 1647.0}, {"date": "2026-08-12", "produto": "Decreto PMDF/PMGO — 12 meses", "valor": 1647.0}, {"date": "2026-08-12", "produto": "Decreto PMDF/PMGO — 12 meses", "valor": 1647.0}, {"date": "2026-08-12", "produto": "Decreto PMDF/PMGO — 6 meses", "valor": 974.95}, {"date": "2026-08-12", "produto": "Decreto PMDF/PMGO — 12 meses", "valor": 1564.65}, {"date": "2026-08-12", "produto": "Decreto PMDF/PMGO — 12 meses", "valor": 1564.65}, {"date": "2026-08-12", "produto": "Decreto PMDF/PMGO — 12 meses", "valor": 1564.65}, {"date": "2026-08-12", "produto": "Decreto PMDF/PMGO — 12 meses", "valor": 1647.0}, {"date": "2026-08-12", "produto": "Decreto PMDF/PMGO — 6 meses", "valor": 1147.0}, {"date": "2026-08-12", "produto": "Decreto PMDF/PMGO — 6 meses", "valor": 1147.0}, {"date": "2026-08-12", "produto": "Decreto PMDF/PMGO — 12 meses", "valor": 1647.0}, {"date": "2026-08-12", "produto": "Decreto PMDF/PMGO — 12 meses", "valor": 1564.65}, {"date": "2026-08-12", "produto": "Decreto PMDF/PMGO — 12 meses", "valor": 1647.0}, {"date": "2026-08-12", "produto": "Decreto PMDF/PMGO — 6 meses", "valor": 1147.0}, {"date": "2026-08-12", "produto": "CFP PMDF 2.0 — 1 ano", "valor": 797.59}, {"date": "2026-08-11", "produto": "Decreto PMDF/PMGO — 12 meses", "valor": 1399.95}, {"date": "2026-08-11", "produto": "Decreto PMDF/PMGO — 12 meses", "valor": 1647.0}, {"date": "2026-08-11", "produto": "Decreto PMDF/PMGO — 12 meses", "valor": 1647.0}, {"date": "2026-08-11", "produto": "Decreto PMDF/PMGO — 6 meses", "valor": 1147.0}, {"date": "2026-08-11", "produto": "Decreto PMDF/PMGO — 12 meses", "valor": 1564.65}, {"date": "2026-08-11", "produto": "CFP PMDF 2.0 — mensal", "valor": 492.86}, {"date": "2026-08-11", "produto": "Decreto PMDF/PMGO — 6 meses", "valor": 1147.0}, {"date": "2026-08-11", "produto": "Decreto PMDF/PMGO — 12 meses", "valor": 1647.0}, {"date": "2026-08-11", "produto": "Decreto PMDF/PMGO — 6 meses", "valor": 1147.0}, {"date": "2026-08-11", "produto": "Decreto PMDF/PMGO — 12 meses", "valor": 1647.0}, {"date": "2026-08-11", "produto": "Decreto PMDF/PMGO — 12 meses", "valor": 1647.0}, {"date": "2026-08-11", "produto": "Decreto PMDF/PMGO — 12 meses", "valor": 1647.0}, {"date": "2026-08-10", "produto": "CFP PMDF 2.0 — mensal", "valor": 492.86}, {"date": "2026-08-10", "produto": "CFP PMDF 2.0 — recorrente", "valor": 189.0}, {"date": "2026-08-08", "produto": "CFP PMDF 2.0 — 1 ano", "valor": 1357.6}, {"date": "2026-08-08", "produto": "CFP PMDF 2.0 — 1 ano", "valor": 1357.6}, {"date": "2026-08-08", "produto": "PCDF — Investigador (1 ano)", "valor": 1527.45}, {"date": "2026-08-06", "produto": "CFP PMDF 2.0 — recorrente", "valor": 151.92}, {"date": "2026-08-05", "produto": "CFP PMDF 2.0 — mensal", "valor": 492.86}, {"date": "2026-08-05", "produto": "CFP PMDF 2.0 — mensal", "valor": 492.86}, {"date": "2026-08-05", "produto": "CFP PMDF 2.0 — 1 ano", "valor": 1697.0}, {"date": "2026-08-05", "produto": "CFP PMDF 2.0 — mensal", "valor": 492.86}, {"date": "2026-08-04", "produto": "CFP PMDF 2.0 — 1 ano", "valor": 848.5}, {"date": "2026-08-04", "produto": "CFP PMDF 2.0 — 1 ano", "valor": 1527.3}, {"date": "2026-08-03", "produto": "CFP PMDF 2.0 — mensal", "valor": 1199.0}, {"date": "2026-08-03", "produto": "CFP PMDF 2.0 — recorrente", "valor": 209.0}, {"date": "2026-08-03", "produto": "CFP PMDF 2.0 — mensal", "valor": 648.5}, {"date": "2026-07-31", "produto": "CFP PMDF 2.0 — mensal", "valor": 1297.0}, {"date": "2026-07-22", "produto": "PCDF — Investigador", "valor": 648.95}, {"date": "2026-07-22", "produto": "PCDF — Investigador", "valor": 648.95}, {"date": "2026-07-18", "produto": "CFP PMDF 2.0 — 1 ano", "valor": 1697.0}, {"date": "2026-07-17", "produto": "CFP PMDF 2.0 — mensal", "valor": 1297.0}, {"date": "2026-07-16", "produto": "CFP PMDF 2.0 — recorrente", "valor": 189.9}, {"date": "2026-07-15", "produto": "PCDF — Investigador", "valor": 1297.9}, {"date": "2026-07-14", "produto": "CFP PMDF 2.0 — 1 ano", "valor": 1697.0}, {"date": "2026-07-13", "produto": "CFP PMDF 2.0 — 1 ano", "valor": 1697.0}, {"date": "2026-07-11", "produto": "CFP PMDF 2.0 — recorrente", "valor": 199.0}, {"date": "2026-07-10", "produto": "CFP PMDF 2.0 — recorrente", "valor": 189.0}, {"date": "2026-07-08", "produto": "CFP PMDF 2.0 — mensal", "valor": 1297.0}, {"date": "2026-07-07", "produto": "CFP PMDF 2.0 — 1 ano", "valor": 1187.9}, {"date": "2026-07-06", "produto": "CFP PMDF 2.0 — recorrente", "valor": 151.92}, {"date": "2026-07-05", "produto": "CFP PMDF 2.0 — 1 ano", "valor": 848.5}, {"date": "2026-07-05", "produto": "CFP PMDF 2.0 — 1 ano", "valor": 1187.9}, {"date": "2026-07-05", "produto": "CFP PMDF 2.0 — mensal", "valor": 907.9}, {"date": "2026-07-05", "produto": "CFP PMDF 2.0 — mensal", "valor": 907.9}, {"date": "2026-06-30", "produto": "CFP PMDF 2.0 — 1 ano", "valor": 1697.0}, {"date": "2026-06-26", "produto": "PCDF — Investigador", "valor": 673.5}, {"date": "2026-06-26", "produto": "CFP PMDF 2.0 — 1 ano", "valor": 1527.3}, {"date": "2026-06-25", "produto": "CFP PMDF 2.0 — mensal", "valor": 1297.0}, {"date": "2026-06-18", "produto": "CFP PMDF 2.0 — 1 ano", "valor": 1697.0}, {"date": "2026-06-18", "produto": "PCDF — Investigador", "valor": 673.5}, {"date": "2026-06-18", "produto": "CFP PMDF 2.0 — 1 ano", "valor": 1595.18}, {"date": "2026-06-18", "produto": "CFP PMDF 2.0 — 1 ano", "valor": 1697.0}, {"date": "2026-06-17", "produto": "CFP PMDF 2.0 — 1 ano", "valor": 1697.0}, {"date": "2026-06-16", "produto": "CFP PMDF 2.0 — 1 ano", "valor": 1697.0}, {"date": "2026-06-16", "produto": "CFP PMDF 2.0 — recorrente", "valor": 189.9}, {"date": "2026-06-16", "produto": "CFP PMDF 2.0 — mensal", "valor": 1297.0}, {"date": "2026-06-15", "produto": "CFP PMDF 2.0 — mensal", "valor": 1297.0}, {"date": "2026-06-12", "produto": "CFP PMDF 2.0 — 1 ano", "valor": 1697.0}, {"date": "2026-06-12", "produto": "CFP PMDF 2.0 — recorrente", "valor": 199.0}, {"date": "2026-06-11", "produto": "CFP PMDF 2.0 — 1 ano", "valor": 1697.0}, {"date": "2026-06-11", "produto": "CFP PMDF 2.0 — 1 ano", "valor": 1697.0}, {"date": "2026-06-11", "produto": "CFP PMDF 2.0 — recorrente", "valor": 189.0}, {"date": "2026-06-10", "produto": "CFP PMDF 2.0 — 1 ano", "valor": 1697.0}, {"date": "2026-06-07", "produto": "CFP PMDF 2.0 — 1 ano", "valor": 1527.3}, {"date": "2026-06-06", "produto": "PCDF — Investigador", "valor": 673.5}, {"date": "2026-06-06", "produto": "CFP PMDF 2.0 — recorrente", "valor": 151.92}, {"date": "2026-06-03", "produto": "CFP PMDF 2.0 — mensal", "valor": 1199.0}, {"date": "2026-06-03", "produto": "CFP PMDF 2.0 — 1 ano", "valor": 1697.0}, {"date": "2026-06-02", "produto": "CFP PMDF 2.0 — mensal", "valor": 1199.0}, {"date": "2026-06-02", "produto": "PCDF — Investigador", "valor": 673.5}, {"date": "2026-08-28", "produto": "Decreto PMDF/PMGO — 6 meses (recorrente)", "valor": 180.0}, {"date": "2026-08-25", "produto": "Decreto PMDF/PMGO — 6 meses", "valor": 1247.0}, {"date": "2026-08-21", "produto": "Decreto PMDF/PMGO — 6 meses", "valor": 1247.0}, {"date": "2026-08-21", "produto": "CFP PMDF 2.0 — mensal", "valor": 492.86}, {"date": "2026-08-18", "produto": "Decreto PMDF/PMGO — 6 meses", "valor": 1247.0}]};
+const D = DADOS;
+const RAW = D; // alias
 
 const PRODUCT_COLORS = {};
 const PRODUCT_PALETTE = ['#9070F0','#10A870','#F08820','#3B82F6','#E754A8','#F83030','#C4B5F7','#5B1FD6'];
-const CAMPAIGN_PALETTE_STEPS = 6;
 
 Chart.defaults.color = 'rgba(255,255,255,.55)';
 Chart.defaults.font.family = "'Inter', sans-serif";
@@ -353,70 +453,283 @@ let mainChartInstance = null;
 let donutChartInstance = null;
 
 const fmtBRL = v => 'R$ ' + v.toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
-const fmtInt = v => v.toLocaleString('pt-BR');
+const fmtInt = v => Math.round(v).toLocaleString('pt-BR');
+const fmtPct = v => v.toLocaleString('pt-BR', {maximumFractionDigits:1});
+const fmtX = v => v.toLocaleString('pt-BR', {maximumFractionDigits:2}) + 'x';
+const fmtPctStr = v => v.toLocaleString('pt-BR', {maximumFractionDigits:1}) + '%';
+const FMT = { brl: fmtBRL, int: fmtInt, x: fmtX, pct: fmtPctStr };
 
 function toDate(str){ return new Date(str + 'T00:00:00'); }
+function addDays(d, n){ const x = new Date(d + 'T00:00:00'); x.setDate(x.getDate()+n); return x.toISOString().slice(0,10); }
 
-function filterDaily(start, end){
-  return RAW.daily.filter(d => d.date >= start && d.date <= end);
-}
-function filterByDate(arr, start, end){
-  return arr.filter(d => d.date >= start && d.date <= end);
-}
+// ---------- estado ----------
+const PRIMEIRO = D.primeiro_dia;               // 01/06
+const ULT_DIARIO = D.ultimo_dia_diario;        // 20/08 (diário)
+const HOJE = D.hoje;                           // 07/09
+const BLOCO = D.bloco;                         // 28/08–07/09
+const BURACO = D.buraco;                       // 21–27/08
+const DIA_PARCIAL = D.dia_parcial;             // 20/08
+let from = PRIMEIRO, to = HOJE;
+let currentView = 'perpetuo';
 
-function render(start, end){
-  const daily = filterDaily(start, end);
-  const campanhas = filterByDate(RAW.campanhas, start, end);
-  const produtos = filterByDate(RAW.produtos, start, end);
-
-  const totalGasto = daily.reduce((a,b)=>a+b.gasto,0);
-  const totalFaturamento = daily.reduce((a,b)=>a+b.faturamento,0);
-  const totalLeads = daily.reduce((a,b)=>a+b.leads,0);
-  const totalLeadsPago = daily.reduce((a,b)=>a+b.leads_pago,0);
-  const totalLeadsOrganico = daily.reduce((a,b)=>a+b.leads_organico,0);
-  const totalVendas = daily.reduce((a,b)=>a+b.vendas,0);
-  const totalAlcance = daily.reduce((a,b)=>a+b.alcance,0);
-  const totalCliques = daily.reduce((a,b)=>a+b.cliques,0);
-  const totalLpViews = daily.reduce((a,b)=>a+b.lp_views,0);
-  const roas = totalGasto > 0 ? (totalFaturamento/totalGasto) : 0;
-
-  renderKPIs({totalGasto, totalFaturamento, totalLeads, totalLeadsPago, totalLeadsOrganico, roas});
-  renderMainChart(daily);
-  renderDonut(produtos);
-  renderCampaignBars(campanhas);
-  renderFunnel({totalAlcance, totalCliques, totalLpViews, totalLeads, totalLeadsPago, totalLeadsOrganico, totalVendas});
-
-  document.getElementById('periodLabel').textContent =
-    `${toDate(start).toLocaleDateString('pt-BR')} — ${toDate(end).toLocaleDateString('pt-BR')} · dados reais de campanhas, vendas e leads`;
+// ---------- dados filtrados ----------
+function filtrados(){
+  const daily = D.diario.filter(d => d.data >= from && d.data <= to);
+  const blocoIncluido = (to >= BLOCO.inicio && from <= BLOCO.fim);
+  const tx = D.transacoes.filter(t => t.data >= from && t.data <= to);
+  const pagos = tx.filter(t => t.status === 'Pago');
+  const falhas = tx.filter(t => t.status === 'Falha');
+  return { daily, blocoIncluido, tx, pagos, falhas };
 }
 
-// ---- KPIs ----
-function renderKPIs({totalGasto, totalFaturamento, totalLeads, totalLeadsPago, totalLeadsOrganico, roas}){
-  const kpiGrid = document.getElementById('kpiGrid');
+function sumGasto(daily, key){
+  // exclui o dia parcial (20/08) dos totais de gasto — preserva ref histórica
+  return daily.reduce((a,d) => a + (d.parcial ? 0 : (d[key]||0)), 0);
+}
+function sumAtivo(daily, key){
+  return daily.reduce((a,d) => a + (d[key]||0), 0);
+}
+
+function calcKPIs(){
+  const { daily, blocoIncluido, pagos, falhas } = filtrados();
+
+  const investimento = sumGasto(daily, 'gasto') + (blocoIncluido ? BLOCO.gasto : 0);
+  const faturamento = pagos.reduce((a,t)=>a+t.comissao, 0);
+  const compras = pagos.length;
+  const conversas = sumAtivo(daily, 'conversas') + (blocoIncluido ? BLOCO.conversas : 0);
+  const gastoWpp = sumGasto(daily, 'gasto_wpp') + (blocoIncluido ? BLOCO.gasto_wpp : 0);
+
+  const roas = investimento > 0 ? faturamento/investimento : null;
+  const cpa = compras > 0 ? investimento/compras : null;
+  const ticket = compras > 0 ? faturamento/compras : null;
+  const custoMsg = conversas > 0 ? gastoWpp/conversas : null;
+  const taxaFalha = (pagos.length+falhas.length) > 0 ? 100*falhas.length/(pagos.length+falhas.length) : null;
+
+  // lançamento (captação + lembrete)
+  const invCaptacao = sumGasto(daily, 'gasto_captacao');
+  const invLembrete = sumGasto(daily, 'gasto_lembrete');
+  const invLanc = invCaptacao + invLembrete;
+  const leads = sumAtivo(daily, 'leads');
+  const cpl = leads > 0 ? invCaptacao/leads : null;
+  const pagosDecreto = pagos.filter(t => t.curso.includes('Decreto'));
+  const comissaoDecreto = pagosDecreto.reduce((a,t)=>a+t.comissao,0);
+  const roasLanc = invLanc > 0 ? comissaoDecreto/invLanc : null;
+
+  return { investimento, faturamento, roas, compras, cpa, ticket, conversas, gastoWpp, custoMsg, taxaFalha,
+           invCaptacao, invLembrete, invLanc, leads, cpl, pagosDecreto, comissaoDecreto, roasLanc,
+           pagos, falhas, daily, blocoIncluido };
+}
+
+function calcPrev(){
+  // período anterior de mesma duração (para deltas)
+  const dias = Math.round((toDate(to) - toDate(from))/86400000) + 1;
+  const pTo = addDays(from, -1);
+  const pFrom = addDays(from, -dias);
+  const pDaily = D.diario.filter(d => d.data >= pFrom && d.data <= pTo);
+  const pBloco = (pTo >= BLOCO.inicio && pFrom <= BLOCO.fim);
+  const pTx = D.transacoes.filter(t => t.data >= pFrom && t.data <= pTo);
+  const pPagos = pTx.filter(t => t.status === 'Pago');
+  const inv = sumGasto(pDaily, 'gasto') + (pBloco ? BLOCO.gasto : 0);
+  const fat = pPagos.reduce((a,t)=>a+t.comissao,0);
+  const comp = pPagos.length;
+  const conv = sumAtivo(pDaily, 'conversas') + (pBloco ? BLOCO.conversas : 0);
+  const falhas = pTx.filter(t => t.status === 'Falha').length;
+  return {
+    has: pDaily.length > 0 || pBloco || pPagos.length > 0,
+    inv, fat, comp, conv,
+    roas: inv>0 ? fat/inv : null,
+    taxaFalha: (comp+falhas)>0 ? 100*falhas/(comp+falhas) : null,
+  };
+}
+
+function deltaPct(cur, prev){
+  if (prev == null || prev === 0) return null;
+  return (cur - prev) / prev * 100;
+}
+
+// ---------- contador animado ----------
+function animateValue(el, target, fmt){
+  const dur = 550, t0 = performance.now();
+  function step(t){
+    const p = Math.min(1, (t - t0)/dur);
+    const eased = 1 - Math.pow(1-p, 3);
+    el.textContent = fmt(target * eased);
+    if (p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+// ---------- KPI card ----------
+function kpiCard({label, value, type, icon, sub, delta, bench, benchColor}){
+  const fmt = FMT[type] || fmtBRL;
+  const deltaHtml = delta == null ? '' :
+    (delta > 0.05 ? `<span class="kpi-delta up">▲ ${fmtPct(delta)}%</span>` :
+     delta < -0.05 ? `<span class="kpi-delta down">▼ ${fmtPct(Math.abs(delta))}%</span>` :
+     `<span class="kpi-delta flat">—</span>`);
+  const benchHtml = bench == null ? '' :
+    `<div class="kpi-bench"><i style="width:${Math.max(2, Math.min(100, bench))}%; background:${benchColor||'var(--purple-light)'}"></i></div>`;
+  return `<div class="card">
+    <div class="kpi-label"><span class="kpi-icon">${icon}</span>${label}</div>
+    <div class="kpi-value" data-val="${value}" data-type="${type}">${fmt(value)}</div>
+    <div class="kpi-sub">${sub}${deltaHtml}</div>
+    ${benchHtml}
+  </div>`;
+}
+
+function renderKPIs(){
+  const k = calcKPIs();
+  const p = calcPrev();
+  const grid = document.getElementById('kpiGrid');
+
+  if (currentView === 'lancamento'){
+    const items = [
+      { label:'Investimento da Captação', value:k.invCaptacao, type:'brl', icon:'🎯',
+        sub:'fase Captação · Meta' },
+      { label:'Leads Gerados', value:k.leads, type:'int', icon:'👤',
+        sub:'pixel · fb_pixel_lead' },
+      { label:'CPL', value:k.cpl ?? 0, type:'brl', icon:'🧲',
+        sub:'captação ÷ leads · meta R$ 20', bench: k.cpl ? Math.min(100, 100*k.cpl/40) : null, benchColor:'var(--orange)' },
+      { label:'Compras do Lançamento', value:k.pagosDecreto.length, type:'int', icon:'🛒',
+        sub:'mentoria Decreto PMDF/PMGO (oferta)' },
+      { label:'ROAS do Lançamento', value:k.roasLanc ?? 0, type:'x', icon:'📈',
+        sub:'comissão da oferta ÷ (captação + lembrete)' },
+    ];
+    grid.innerHTML = items.map(it => kpiCard(it)).join('');
+    animateGrid();
+    return;
+  }
+
   const items = [
-    { label:'Valor Investido', value:fmtBRL(totalGasto), icon:'💰', sub:'Meta Ads · período selecionado' },
-    { label:'Faturamento Líquido', value:fmtBRL(totalFaturamento), icon:'📈', sub:'Tutory · somente vendas Pagas' },
-    { label:'Leads Gerados', value:fmtInt(totalLeads), icon:'👤', sub:`Tráfego ${fmtInt(totalLeadsPago)} + Orgânico ${fmtInt(totalLeadsOrganico)}` },
-    { label:'ROAS', value: (totalGasto>0 ? roas.toFixed(2)+'x' : '—'), icon:'🎯', sub:'Faturamento ÷ investimento' },
+    { label:'Investimento', value:k.investimento, type:'brl', icon:'💰',
+      sub:'Σ Valor gasto Meta', delta:deltaPct(k.investimento, p.inv) },
+    { label:'Faturamento Líquido', value:k.faturamento, type:'brl', icon:'📈',
+      sub:'Σ Sua Comissão (Pago)', delta:deltaPct(k.faturamento, p.fat) },
+    { label:'ROAS', value:k.roas ?? 0, type:'x', icon:'🎯',
+      sub:'faturamento ÷ investimento · meta 4×', bench: k.roas ? Math.min(100, 100*k.roas/6) : null, delta:deltaPct(k.roas, p.roas) },
+    { label:'Compras', value:k.compras, type:'int', icon:'🛒',
+      sub:'transações Tutory Pagas', delta:deltaPct(k.compras, p.comp) },
+    { label:'CPA', value:k.cpa ?? 0, type:'brl', icon:'💸',
+      sub:'investimento ÷ compras', delta:deltaPct(k.cpa, p.comp>0 ? p.inv/p.comp : null) },
+    { label:'Ticket Médio', value:k.ticket ?? 0, type:'brl', icon:'🏷️',
+      sub:'faturamento ÷ compras' },
+    { label:'Conversas Iniciadas', value:k.conversas, type:'int', icon:'💬',
+      sub:'WhatsApp · messaging_conversation_started', delta:deltaPct(k.conversas, p.conv) },
+    { label:'Custo por Mensagem', value:k.custoMsg ?? 0, type:'brl', icon:'📨',
+      sub:'gasto WPP ÷ conversas' },
+    { label:'Taxa de Falha', value:k.taxaFalha ?? 0, type:'pct', icon:'⚠️',
+      sub:'falha ÷ (pago + falha)', delta:deltaPct(k.taxaFalha, p.taxaFalha), bench: k.taxaFalha ? Math.min(100, 100*k.taxaFalha/60) : null, benchColor:'var(--red)' },
   ];
-  kpiGrid.innerHTML = items.map(k => `
-    <div class="card">
-      <div class="kpi-label"><span class="kpi-icon">${k.icon}</span>${k.label}</div>
-      <div class="kpi-value">${k.value}</div>
-      <div class="kpi-sub">${k.sub}</div>
-    </div>`).join('');
+  grid.innerHTML = items.map(it => kpiCard(it)).join('');
+  animateGrid();
 }
 
-// ---- Gráfico principal ----
-function renderMainChart(daily){
+function animateGrid(){
+  document.querySelectorAll('#kpiGrid .kpi-value').forEach(el => {
+    const v = parseFloat(el.dataset.val) || 0;
+    const type = el.dataset.type || 'int';
+    const fmt = FMT[type] || fmtInt;
+    animateValue(el, v, fmt);
+  });
+}
+
+// ---------- alertas ----------
+function renderAlerts(){
+  const k = calcKPIs();
+  const el = document.getElementById('alerts');
+  const items = [];
+  if (k.falhas.length > 0){
+    const fiscal = k.falhas.reduce((a,t)=>a+t.fiscal,0);
+    items.push(`<div class="alert danger"><span class="ico">⚠️</span><span><b>${fmtInt(k.falhas.length)} cartões falharam</b> — recuperar pagamento (${fmtBRL(fiscal)} em valor fiscal no período).</span></div>`);
+  }
+  if (k.roas != null && k.roas < 3){
+    items.push(`<div class="alert warn"><span class="ico">📉</span><span><b>ROAS abaixo de 3×</b> no período (${k.roas.toFixed(2)}×) — revisar oferta e segmentação.</span></div>`);
+  }
+  if (k.cpa != null && k.cpa > 50){
+    items.push(`<div class="alert warn"><span class="ico">💸</span><span><b>CPA acima de R$ 50</b> (${fmtBRL(k.cpa)}) — avaliar eficiência das campanhas de conversa.</span></div>`);
+  }
+  if (k.taxaFalha != null && k.taxaFalha > 25){
+    items.push(`<div class="alert info"><span class="ico">🔁</span><span><b>Taxa de falha de ${fmtPct(k.taxaFalha)}%</b> — acima de 25%: revisar fluxo de checkout e recuperação.</span></div>`);
+  }
+  if (items.length === 0){
+    items.push(`<div class="alert info"><span class="ico">✅</span><span>Tudo dentro do esperado no período filtrado — nenhum alerta de ação.</span></div>`);
+  }
+  el.innerHTML = items.join('');
+}
+
+// ---------- gráfico principal ----------
+function renderMainChart(){
+  const { daily, blocoIncluido, pagos } = filtrados();
   if (mainChartInstance) mainChartInstance.destroy();
   const ctx = document.getElementById('mainChart');
+
+  const fatPorDia = {};
+  for (const t of pagos) fatPorDia[t.data] = (fatPorDia[t.data]||0) + t.comissao;
+
+  // eixo X: dias diários + marcador de buraco + bloco
+  const labels = [];
+  const fatValues = [];
+  const gastoValues = [];
+  const gapIndexes = [];
+
+  for (const d of daily){
+    labels.push(toDate(d.data).toLocaleDateString('pt-BR', {day:'2-digit', month:'2-digit'}));
+    fatValues.push(fatPorDia[d.data] || 0);
+    gastoValues.push(d.parcial ? null : d.gasto);  // 20/08 marcado (não entra no total)
+  }
+  // buraco (21–27/08)
+  const gapIdx = labels.length;
+  labels.push('21–27/08');
+  fatValues.push(0);
+  gastoValues.push(null);
+  gapIndexes.push(gapIdx);
+  // bloco (28/08–07/09)
+  if (blocoIncluido){
+    const fatBloco = pagos.filter(t => t.data >= BLOCO.inicio && t.data <= BLOCO.fim).reduce((a,t)=>a+t.comissao,0);
+    labels.push('28/08–07/09');
+    fatValues.push(fatBloco);
+    gastoValues.push(BLOCO.gasto);
+  }
+
+  const gapAnnot = {
+    id: 'gapAnnot',
+    afterDatasetsDraw(chart){
+      const {ctx, scales} = chart;
+      const x = scales.x, y = scales.y;
+      if (gapIndexes.length){
+        const xi = x.getPixelForValue(gapIndexes[0]);
+        const left = xi - x.getPixelForValue(1) / 2;
+        const right = xi + x.getPixelForValue(1) / 2;
+        ctx.save();
+        ctx.fillStyle = 'rgba(255,255,255,.05)';
+        ctx.fillRect(left, y.top, right-left, y.bottom - y.top);
+        ctx.strokeStyle = 'rgba(255,255,255,.15)';
+        ctx.setLineDash([4,4]);
+        ctx.beginPath();
+        ctx.moveTo(left, y.top); ctx.lineTo(left, y.bottom);
+        ctx.moveTo(right, y.top); ctx.lineTo(right, y.bottom);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.restore();
+      }
+      // marca o bloco
+      const bi = labels.length - 1;
+      if (blocoIncluido && bi > 0){
+        const xi = x.getPixelForValue(bi);
+        const hw = x.getPixelForValue(1) / 2;
+        ctx.save();
+        ctx.fillStyle = 'rgba(144,112,240,.10)';
+        ctx.fillRect(xi - hw, y.top, hw*2, y.bottom - y.top);
+        ctx.restore();
+      }
+    }
+  };
+
   mainChartInstance = new Chart(ctx, {
     data:{
-      labels: daily.map(d => toDate(d.date).toLocaleDateString('pt-BR', {day:'2-digit', month:'2-digit'})),
+      labels,
       datasets:[
         {
-          type:'bar', label:'Faturamento', data: daily.map(d=>d.faturamento),
+          type:'bar', label:'Faturamento', data: fatValues,
           backgroundColor: c => {
             const g = c.chart.ctx.createLinearGradient(0,0,0,260);
             g.addColorStop(0,'#9070F0'); g.addColorStop(1,'#5B1FD6');
@@ -425,8 +738,9 @@ function renderMainChart(daily){
           borderRadius:4, maxBarThickness:18, order:2,
         },
         {
-          type:'line', label:'Investimento', data: daily.map(d=>d.gasto),
-          borderColor:'#FFFFFF', borderWidth:2, pointRadius:0, pointHoverRadius:4, tension:.35, order:1,
+          type:'line', label:'Investimento', data: gastoValues,
+          borderColor:'#FFFFFF', borderWidth:2, pointRadius:0, pointHoverRadius:4,
+          tension:.35, spanGaps:false, order:1,
         }
       ]
     },
@@ -438,31 +752,39 @@ function renderMainChart(daily){
         tooltip:{
           backgroundColor:'#171332', borderColor:'rgba(255,255,255,.12)', borderWidth:1,
           titleColor:'#FFFFFF', bodyColor:'#FFFFFF', padding:10,
-          callbacks:{ label: c => ` ${c.dataset.label}: ${fmtBRL(c.raw)}` }
+          callbacks:{
+            title: items => items[0].label,
+            label: c => c.raw == null ? ' sem dados' : ` ${c.dataset.label}: ${fmtBRL(c.raw)}`
+          }
         }
       },
       scales:{
         x:{ grid:{ display:false }, ticks:{ color:'rgba(255,255,255,.45)', font:{ size:9 }, maxRotation:0, autoSkip:true, maxTicksLimit:14 } },
         y:{ grid:{ color:'rgba(255,255,255,.06)' }, ticks:{ color:'rgba(255,255,255,.45)', font:{ size:10 }, callback:v=>'R$ '+(v/1000).toFixed(1)+'k' } }
       }
-    }
+    },
+    plugins:[gapAnnot]
   });
+
+  document.getElementById('mainChartNote').innerHTML =
+    `Período <b>21–27/08</b> sem dados em nenhuma fonte (buraco). ` +
+    (blocoIncluido ? `Período <b>28/08–07/09</b> agregado (Meta sem granularidade diária) — entra como bloco. ` : '') +
+    `Dia <b>${DIA_PARCIAL.split('-').reverse().join('/')}</b> marcado como parcial (fora do total de investimento).`;
 }
 
-// ---- Donut produtos ----
-function renderDonut(produtos){
+// ---------- donut produtos ----------
+function renderDonut(){
+  const { pagos } = filtrados();
   const totals = {};
-  produtos.forEach(p => { totals[p.produto] = (totals[p.produto]||0) + 1; });
+  for (const t of pagos) totals[t.curso] = (totals[t.curso]||0) + 1;
   const entries = Object.entries(totals).sort((a,b)=>b[1]-a[1]);
   const total = entries.reduce((a,[,v])=>a+v,0);
-
   document.getElementById('donutTotal').textContent = total;
 
   entries.forEach(([name], i) => { if(!PRODUCT_COLORS[name]) PRODUCT_COLORS[name] = PRODUCT_PALETTE[i % PRODUCT_PALETTE.length]; });
-
-  if (donutChartInstance) donutChartInstance.destroy();
   const ctx = document.getElementById('donutChart');
   const wrap = document.getElementById('donutLegend');
+  if (donutChartInstance) donutChartInstance.destroy();
 
   if (total === 0){
     wrap.innerHTML = '<div class="empty-note">Sem vendas no período</div>';
@@ -475,11 +797,8 @@ function renderDonut(produtos){
     type:'doughnut',
     data:{
       labels: entries.map(e=>e[0]),
-      datasets:[{
-        data: entries.map(e=>e[1]),
-        backgroundColor: entries.map(e=>PRODUCT_COLORS[e[0]]),
-        borderColor:'#121022', borderWidth:3, hoverOffset:4,
-      }]
+      datasets:[{ data: entries.map(e=>e[1]), backgroundColor: entries.map(e=>PRODUCT_COLORS[e[0]]),
+        borderColor:'#121022', borderWidth:3, hoverOffset:4 }]
     },
     options:{
       responsive:true, maintainAspectRatio:false, cutout:'72%',
@@ -497,15 +816,66 @@ function renderDonut(produtos){
   }).join('');
 }
 
-// ---- Barras campanhas ----
-function renderCampaignBars(campanhas){
+// ---------- top / worst ROAS (barras horizontais) ----------
+function renderRoasBars(){
+  const camp = D.campanhas.filter(c => c.gasto > 0);
+  const top = [...camp].sort((a,b)=>b.roas_pixel-a.roas_pixel).slice(0,5);
+  const worst = [...camp].sort((a,b)=>a.roas_pixel-b.roas_pixel).slice(0,5);
+
+  const makeBar = (arr, elId, showZero) => {
+    const wrap = document.getElementById(elId);
+    const max = Math.max(...arr.map(c=>c.roas_pixel), 1);
+    wrap.innerHTML = arr.map((c,i) => `
+      <div class="bar-row">
+        <div class="top-line">
+          <span class="name" title="${c.campanha}">${c.campanha}</span>
+          <span class="amt">${c.roas_pixel ? c.roas_pixel.toFixed(2)+'x' : '—'}</span>
+        </div>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:${Math.max(2, c.roas_pixel/max*100)}%; opacity:${Math.max(1 - i*0.14, 0.5)}; background:${c.roas_pixel ? 'linear-gradient(90deg, var(--purple-deep), var(--purple-light))' : 'rgba(255,255,255,.10)'}"></div>
+        </div>
+      </div>`).join('');
+    if (arr.every(c => c.roas_pixel === 0) && showZero){
+      wrap.innerHTML = '<div class="empty-note">Sem conversão por pixel no período</div>';
+    }
+  };
+
+  makeBar(top, 'topRoasBars');
+  makeBar(worst, 'worstRoasBars', true);
+  document.getElementById('topRoasBars').insertAdjacentHTML('afterend', '<div class="card-sub" style="margin-top:10px">ROAS do pixel Meta (vendas atribuídas por pixel). Campanhas de WhatsApp vendem por conversa e não registram pixel.</div>');
+}
+
+// ---------- funil do perpétuo ----------
+function renderFunnel(){
+  const k = calcKPIs();
+  const wrap = document.getElementById('funnel');
+  const conversaRate = k.conversas > 0 ? (k.compras/k.conversas)*100 : 0;
+  const stages = [
+    { label:'Investimento', value: fmtBRL(k.investimento), pct:'100% do topo' },
+    { label:'Conversas Iniciadas', value: fmtInt(k.conversas), pct: `${fmtBRL(k.custoMsg||0)} por conversa` },
+    { label:'Compras', value: fmtInt(k.compras), pct: `${fmtPct(conversaRate)}% das conversas` },
+  ];
+  const stageColors = ['#5B1FD6','#7B4CE0','#9070F0'];
+  const widths = [100, 72, 44];
+  wrap.innerHTML = stages.map((f,i) => `
+    <div class="funnel-stage" style="width:${widths[i]}%; background:${stageColors[i]};
+      clip-path: polygon(6% 0, 94% 0, ${88 - i*2}% 100%, ${12 + i*2}% 100%);
+      border-radius:${i===0?'10px 10px 0 0':'0'};">
+      <div class="fs-label">${f.label}</div>
+      <div class="fs-value">${f.value}</div>
+      <div class="fs-pct">${f.pct}</div>
+    </div>`).join('');
+}
+
+// ---------- investimento por campanha ----------
+function renderCampaignBars(){
+  const { blocoIncluido } = filtrados();
   const totals = {};
-  campanhas.forEach(c => { totals[c.campanha] = (totals[c.campanha]||0) + c.gasto; });
-  const entries = Object.entries(totals).filter(([,v])=>v>0).sort((a,b)=>b[1]-a[1]);
+  for (const c of D.campanhas) if (c.gasto > 0) totals[c.campanha] = (totals[c.campanha]||0) + c.gasto;
+  let entries = Object.entries(totals).sort((a,b)=>b[1]-a[1]);
+  if (blocoIncluido) entries = [...entries, ['Período 28/08–07/09 (agregado)', BLOCO.gasto]].sort((a,b)=>b[1]-a[1]);
   const wrap = document.getElementById('campaignBars');
-
   if (entries.length === 0){ wrap.innerHTML = '<div class="empty-note">Sem investimento no período</div>'; return; }
-
   const max = entries[0][1];
   wrap.innerHTML = entries.map(([name, value], i) => {
     const pct = (value/max)*100;
@@ -516,37 +886,53 @@ function renderCampaignBars(campanhas){
   }).join('');
 }
 
-// ---- Funil ----
-function renderFunnel({totalAlcance, totalCliques, totalLpViews, totalLeads, totalLeadsPago, totalLeadsOrganico, totalVendas}){
-  const stages = [
-    { label:'Alcance', value: totalAlcance },
-    { label:'Cliques no Link', value: totalCliques },
-    { label:'Visualizações da Página', value: totalLpViews },
-    { label:'Leads (Tráfego + Orgânico)', value: totalLeads, extra: `Tráfego ${fmtInt(totalLeadsPago)} · Orgânico ${fmtInt(totalLeadsOrganico)}` },
-    { label:'Vendas', value: totalVendas },
-  ];
-  const max = stages[0].value || 1;
-  const stageColors = ['#5B1FD6','#6E39DE','#8055E7','#956FEF','#B497F5'];
-  const wrap = document.getElementById('funnel');
-
-  wrap.innerHTML = stages.map((f, i) => {
-    const pct = (f.value/max)*100;
-    const widthPct = Math.max(pct, 26);
-    const displayPct = pct < 1 ? pct.toFixed(2) : pct.toFixed(1);
-    return `<div class="funnel-stage" style="width:${widthPct}%; background:${stageColors[i]};
-      clip-path: polygon(6% 0, 94% 0, ${88 - i*2}% 100%, ${12 + i*2}% 100%);
-      border-radius:${i===0?'10px 10px 0 0':'0'};">
-      <div class="fs-label">${f.label}</div>
-      <div class="fs-value">${fmtInt(f.value)}</div>
-      <div class="fs-pct">${displayPct}% do topo${f.extra ? ' · '+f.extra : ''}</div>
-    </div>`;
-  }).join('');
+// ---------- últimas transações ----------
+function renderTx(){
+  const { tx } = filtrados();
+  const recent = tx.slice(0, 10);
+  const wrap = document.getElementById('txList');
+  if (recent.length === 0){ wrap.innerHTML = '<div class="empty-note">Sem transações no período</div>'; return; }
+  wrap.innerHTML = recent.map(t => `
+    <div class="tx-row">
+      <span class="tx-date">${t.data.split('-').reverse().join('/')}</span>
+      <div class="tx-info">
+        <div class="tx-aluno">${t.aluno}</div>
+        <div class="tx-curso">${t.curso}</div>
+      </div>
+      <span class="tx-val">${fmtBRL(t.comissao)}</span>
+      <span class="badge ${t.status==='Pago' ? 'ok' : t.status==='Falha' ? 'bad' : 'neu'}">${t.status}</span>
+    </div>`).join('');
 }
 
-// ============================================================
-// FILTRO DE DATA
-// ============================================================
-const allDates = RAW.daily.map(d=>d.date).sort();
+// ---------- rodapé ----------
+function renderFooter(){
+  const el = document.getElementById('footer');
+  el.innerHTML =
+    `<div><b>Fontes:</b> ${D.fontes.join(' · ')}</div>` +
+    `<div><b>Período coberto:</b> ${PRIMEIRO.split('-').reverse().join('/')} a ${HOJE.split('-').reverse().join('/')}</div>` +
+    `<div><b>Buraco de dados:</b> ${BURACO.inicio.split('-').reverse().join('/')} a ${BURACO.fim.split('-').reverse().join('/')} — sem dados em nenhuma fonte (não interpolado).</div>` +
+    `<div><b>Bloco agregado:</b> ${BLOCO.inicio.split('-').reverse().join('/')} a ${BLOCO.fim.split('-').reverse().join('/')} sem granularidade diária no Meta; inclui ${BLOCO.fim.split('-').reverse().join('/')} (parcial).</div>` +
+    `<div><b>Validação cruzada do bloco (Meta):</b> conjunto R$ ${fmtBRL(BLOCO.gasto)} · criativo R$ ${fmtBRL(D.cross_bloco['criativos - Apro-atum-Mentoria-Anúncios-28-de-ago-de-2026-7-de-set-de-2026.csv'] || 0)}.</div>` +
+    `<div><b>Dados gerados em:</b> ${D.gerado_em} · ${fmtInt(D.resumo.pagos)} pagos · ${fmtInt(D.resumo.falhas)} falhas</div>`;
+}
+
+// ---------- render geral ----------
+function render(){
+  renderKPIs();
+  renderAlerts();
+  renderMainChart();
+  renderDonut();
+  renderRoasBars();
+  renderFunnel();
+  renderCampaignBars();
+  renderTx();
+  renderFooter();
+  document.getElementById('periodLabel').textContent =
+    `${toDate(from).toLocaleDateString('pt-BR')} — ${toDate(to).toLocaleDateString('pt-BR')} · dados reais de campanhas, vendas e leads`;
+}
+
+// ---------- filtro de data ----------
+const allDates = D.diario.map(d=>d.data).concat([BLOCO.fim]).sort();
 const MIN_DATE = allDates[0];
 const MAX_DATE = allDates[allDates.length-1];
 
@@ -557,38 +943,44 @@ endInput.min = MIN_DATE; endInput.max = MAX_DATE;
 startInput.value = MIN_DATE; endInput.value = MAX_DATE;
 
 function applyFilter(){
-  let start = startInput.value || MIN_DATE;
-  let end = endInput.value || MAX_DATE;
-  if (start > end) { [start, end] = [end, start]; }
-  render(start, end);
+  let s = startInput.value || MIN_DATE;
+  let e = endInput.value || MAX_DATE;
+  if (s > e) { [s, e] = [e, s]; }
+  from = s; to = e;
+  render();
 }
-
 startInput.addEventListener('change', () => { setActivePreset(null); applyFilter(); });
 endInput.addEventListener('change', () => { setActivePreset(null); applyFilter(); });
 
 function setActivePreset(key){
   document.querySelectorAll('.preset-btn').forEach(b => b.classList.toggle('active', b.dataset.preset === key));
 }
-
 document.querySelectorAll('.preset-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const p = btn.dataset.preset;
     if (p === 'all'){ startInput.value = MIN_DATE; endInput.value = MAX_DATE; }
     else {
       const days = parseInt(p, 10);
-      const endD = toDate(MAX_DATE);
-      const startD = new Date(endD); startD.setDate(startD.getDate() - (days - 1));
-      const startStr = startD.toISOString().slice(0,10);
+      const startStr = addDays(MAX_DATE, -(days-1));
       startInput.value = startStr < MIN_DATE ? MIN_DATE : startStr;
       endInput.value = MAX_DATE;
     }
     setActivePreset(p);
-    render(startInput.value, endInput.value);
+    applyFilter();
+  });
+});
+
+// ---------- toggle de visão ----------
+document.querySelectorAll('.view-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    currentView = btn.dataset.view;
+    document.querySelectorAll('.view-btn').forEach(b => b.classList.toggle('active', b === btn));
+    renderKPIs();
   });
 });
 
 setActivePreset('all');
-render(MIN_DATE, MAX_DATE);
+render();
 </script>
 
 </body>
